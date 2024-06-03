@@ -1,15 +1,18 @@
 import { useState } from "react";
+import {Link} from "react-router-dom";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className=" sticky top-0 z-10 bg-white shadow backdrop-filter backdrop-blur-lg bg-opacity-30  border-b border-gray-200">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+    <nav className=" sticky top-0 z-10 bg-slate-950 shadow backdrop-filter backdrop-blur-lg bg-opacity-20  border-b rounded border-gray-200">
+      <div className="justify-between mb-50 px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <a href="">
+              <Link to="/">
               <h2 className="text-2xl font-bold">MERN-Auth</h2>
+               </Link>
             </a>
             <div className="md:hidden">
               <button
@@ -51,22 +54,26 @@ export default function NavBar() {
         </div>
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+            className={`flex-1 justify-self-center  pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
               navbar ? "block" : "hidden"
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="text-gray-600 hover:text-blue-600">
-                <a href="">Home</a>
+                <Link to='/'>
+                
+                <p>Home</p>
+                </Link>
               </li>
               <li className="text-gray-600 hover:text-blue-600">
-                <a href="">Blog</a>
+                <Link to='about'>
+                <p>About Us</p>
+                </Link>
               </li>
-              <li className="text-gray-600 hover:text-blue-600">
-                <a href="">About US</a>
-              </li>
-              <li className="text-gray-600 hover:text-blue-600">
-                <a href="">Contact US</a>
+              <li className="text-gray-600  hover:text-blue-600">
+                <Link to="/sign-in">
+                <p>Sign In</p>
+                </Link>
               </li>
             </ul>
           </div>
