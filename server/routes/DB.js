@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const connect = mongoose.connect('mongodb+srv://adityasharma0431:anant99@cluster0.5qnfr2m.mongodb.net/users');
+const connect = mongoose.connect(
+  "mongodb+srv://adityasharma0431:anant99@cluster0.5qnfr2m.mongodb.net/users"
+);
 
 connect
   .then(() => {
@@ -12,41 +13,24 @@ connect
     console.log("Error Connecting Database!");
   });
 
-
-
-
-  const UserSchema = new Schema({
-    googleId: {
+const UserSchema = new Schema(
+  {
+    username: {
       type: String,
       required: true,
-    },
-    displayName: {
-      type: String,
-      required: true,
-    },
-    firstName: {
-      type: String,
-      required: true,
+      unique: true,
     },
     email: {
       type: String,
       required: true,
+      unique: true,
     },
-    lastName: {
+    password: {
       type: String,
       required: true,
     },
-    profileImage: {
-      type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
-  });
+  },
+  { timestamps: true }
+);
 
-  
-  
-  module.exports = mongoose.model("User", UserSchema);
-  
+module.exports = mongoose.model('User', UserSchema);
