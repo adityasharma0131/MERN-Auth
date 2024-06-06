@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({});
+  const initialFormData = { username: "", email: "", password: "" };
+  const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -15,10 +16,10 @@ const Signup = () => {
     setError(null); // Reset error state
 
     try {
-      const res = await fetch('http://localhost:3000/signup', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3000/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -26,14 +27,15 @@ const Signup = () => {
       if (!res.ok) {
         if (res.status === 400) {
           const errorData = await res.json();
-          throw new Error(errorData.message || 'User already exists');
+          throw new Error(errorData.message || "User already exists");
         } else {
           throw new Error(`HTTP error! Status: ${res.status}`);
         }
       }
 
       const data = await res.json();
-      toast.success(data.message || 'User Created Successfully!');
+      toast.success(data.message || "User Created Successfully!");
+      setFormData(initialFormData); // Reset form data
     } catch (err) {
       setError(err.message);
       toast.error(err.message); // Display error toast
@@ -55,6 +57,7 @@ const Signup = () => {
             <input
               type="text"
               id="username"
+              value={formData.username}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleChange}
               placeholder="Username"
@@ -71,6 +74,7 @@ const Signup = () => {
             <input
               type="email"
               id="email"
+              value={formData.email}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Email"
@@ -87,6 +91,7 @@ const Signup = () => {
             <input
               type="password"
               id="password"
+              value={formData.password}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="******************"
