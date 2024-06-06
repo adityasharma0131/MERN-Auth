@@ -9,11 +9,11 @@ export default function NavBar() {
       <div className="justify-between mb-50 px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <a href="">
+            
               <Link to="/">
               <h2 className="text-2xl font-bold">MERN-Auth</h2>
                </Link>
-            </a>
+            
             <div className="md:hidden">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"

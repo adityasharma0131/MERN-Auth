@@ -5,12 +5,13 @@ import About from "./pages/About";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import Header from './components/Header'
+import Header from "./components/Header";
+import { Toaster } from "react-hot-toast"; // Ensure you import the Toaster
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Header />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Toaster /> {/* Include Toaster here to ensure it's available throughout the app */}
     </BrowserRouter>
   );
 };

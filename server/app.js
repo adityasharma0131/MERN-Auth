@@ -1,6 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const cors = require("cors");
+
 var bodyParser = require('body-parser'); // if you need body-parser
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,6 +12,8 @@ var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup');
 
 var app = express();
+
+app.use(cors());
 
 
 // view engine setup
