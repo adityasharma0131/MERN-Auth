@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const initialFormData = { username: "", email: "", password: "" };
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -35,6 +36,7 @@ const Signup = () => {
 
       const data = await res.json();
       toast.success(data.message || "User Created Successfully!");
+      navigate('/sign-in')
       setFormData(initialFormData); // Reset form data
     } catch (err) {
       setError(err.message);

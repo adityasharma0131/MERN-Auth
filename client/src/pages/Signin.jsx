@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 
 const Signin = () => {
   const initialFormData = { email: "", password: "" };
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -13,7 +14,7 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Reset error state
+    setError(null);
 
     try {
       const res = await fetch("http://localhost:3000/signin", {
@@ -35,11 +36,13 @@ const Signin = () => {
       }
 
       const data = await res.json();
+      document.cookie = `user_email=${formData.email}; path=/`;
       toast.success("Logged in successfully!");
-      setFormData(initialFormData); // Reset form data
+      navigate('/');
+      setFormData(initialFormData);
     } catch (err) {
       setError(err.message);
-      toast.error(err.message); // Display error toast
+      toast.error(err.message);
     }
   };
 
@@ -97,8 +100,8 @@ const Signin = () => {
             <span className="text-blue-500 underline">Sign Up</span>
           </Link>
         </div>
+        <Toaster />
       </div>
-      <Toaster /> {/* Add the Toaster component here */}
     </div>
   );
 };
